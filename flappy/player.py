@@ -9,7 +9,7 @@ from flappy.config import (
 )
 
 class Player:
-    def _init_(self,x,y,sprites,sounds):
+    def __init__(self,x,y,sprites,sounds):
         """
         Initialize the player 
         x= initial x position
@@ -28,7 +28,7 @@ class Player:
         self.acc_y=PLAYER_ACC_Y
         self.flap_accv=PLAYER_FLAP_ACC_V
 
-        self.flapped=false
+        self.flapped=False
 
     def flap(self):
         self.vel_y=self.flap_accv
@@ -46,7 +46,7 @@ class Player:
 
 
     def draw(self,screen):
-        screen.blite(self.sprites['player'],(self.x,self.y))
+        screen.blit(self.sprites['player'],(self.x,self.y))
 
     def get_rect(self):
         return self.sprites['player'].get_rect(topleft=(self.x,self.y)) 
