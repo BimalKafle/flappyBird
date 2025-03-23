@@ -100,6 +100,32 @@ class Game:
             self.reset()
             self.main_game()
 
+    def game_over_screen(self):
+        game_over_font = pygame.font.SysFont('Arial', 50)
+        restart_font = pygame.font.SysFont('Arial', 25)
+        
+        game_over_surface = game_over_font.render('Game Over!', True, (255, 0, 0))
+        restart_surface = restart_font.render('Press Space to Restart', True, (255, 255, 255))
+        
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                    return  # Restart the game
+            
+            self.screen.blit(self.sprites['background'], (0, 0))
+            self.base.draw(self.screen)
+            self.player.draw(self.screen)
+
+            # Draw game over messages
+            self.screen.blit(game_over_surface, (SCREENWIDTH // 2 - game_over_surface.get_width() // 2, SCREENHEIGHT // 3))
+            self.screen.blit(restart_surface, (SCREENWIDTH // 2 - restart_surface.get_width() // 2, SCREENHEIGHT // 2))
+
+            pygame.display.update()
+            self.clock.tick(FPS)
+
     def main_game(self):
         """
         Main gameplay loop.
@@ -114,6 +140,7 @@ class Game:
 
             if self.check_collision():
                 self.sounds['hit'].play()
+                self.game_over_screen()
                 return  # Exit the current game and show welcome screen again
 
     def handle_events(self):
