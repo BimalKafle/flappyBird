@@ -6,7 +6,7 @@ from flappy.config import(
 )
 
 class Base:
-    def _init_(self,sprites):
+    def __init__(self,sprites):
         self.x1=0
         self.x2=sprites['base'].get_width()
         self.y=GROUNDY

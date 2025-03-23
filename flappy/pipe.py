@@ -1,4 +1,5 @@
 import random
+import pygame
 from flappy.config import(
     SCREENWIDTH,
     SCREENHEIGHT,
@@ -7,7 +8,7 @@ from flappy.config import(
 )
 
 class Pipe:
-    def _init_(self,x,sprites):
+    def __init__(self,x,sprites):
         self.x=x
         self.sprites=sprites
         self.pipe_height=self.sprites['pipe'][0].get_height()
@@ -30,15 +31,16 @@ class Pipe:
     def draw(self,screen):
         screen.blit(self.sprites['pipe'][0],(self.x,self.upper_y))
 
-        screen.blite(self.sprites['pipe'][1],(self.x,self.lower_y))
+        screen.blit(self.sprites['pipe'][1],(self.x,self.lower_y))
+ 
 
     
     def is_off_screen(self):
         return self.x<-self.sprites['pipe'][0].get_width()
 
     def get_upper_rect(self):
-        pipe_surface=self.sprites['pipe'][0]
-        return pipe_surface.get_rect()
+        pipe_surface = self.sprites['pipe'][0]
+        return pipe_surface.get_rect(topleft=(self.x, self.upper_y))
 
     def get_lower_rect(self):
         pipe_surface=self.sprites['pipe'][1]
