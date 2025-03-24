@@ -3,6 +3,7 @@
 # import pygame
 # from pygame.locals import * # Basic pygame imports
 from flappy.game import Game
+from flappy.bird_agent import BirdAgent
 # # Global Variables for the game
 # FPS = 32
 # SCREENWIDTH = 289
@@ -184,9 +185,19 @@ from flappy.game import Game
 
 
 if __name__ == "__main__":
-    game = Game()
-    game.run()
-   
+        game = Game()
+        # game.evolve_population(population_size=20,generations=100)
+            # Create the agent using your super bird's weights
+        gen1_super_weights = [
+            0.9934436671298781, 
+            -0.08031384814371023, 
+            0.12118864804306795, 
+            -0.9923341266910253
+        ]
+        super_bird = BirdAgent(weights=gen1_super_weights)
+
+        # Run the game with the super bird
+        game.run_agent(super_bird)
     # # This will be the main point from where our game will start
     # pygame.init() # Initialize all pygame's modules
     # FPSCLOCK = pygame.time.Clock()
